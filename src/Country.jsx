@@ -47,22 +47,31 @@ const Country = ({ width, height, population = 100000 }) => {
       style={{ background: 'lightgrey' }}
     >
       <g transform={`translate(${x}, ${y}) scale(${k})`}>
-        <path d={geoPath(auGeoJson)} />
+        <path
+          d={geoPath(auGeoJson)}
+          fill="#fff"
+          stroke="#000"
+          strokeWidth={0.2}
+        />
         <g text-anchor="middle" font-family="sans-serif" font-size="10">
           {highPopulationAuCityFeatures.map(
             ({
               geometry: { coordinates },
               properties: { name, population },
             }) => {
+              const [x, y] = projection(coordinates)
+
               return (
-                <g
-                  transform={`translate(${projection(coordinates).join(',')})`}
-                >
-                  <circle r="2" fill="white"></circle>
-                  <text y="-6" fill="white">
-                    {name}
-                  </text>
-                </g>
+                <>
+                  <circle
+                    key={x}
+                    cx={x}
+                    cy={y}
+                    r="5"
+                    fill="#000"
+                    onClick={() => console.log(name)}
+                  />
+                </>
               )
             }
           )}
