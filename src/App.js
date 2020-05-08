@@ -7,8 +7,8 @@ import Country from './Country'
 function App() {
   return (
     <div className="App">
-      <Circle />
-      {/* <Country /> */}
+      {/* <Circle /> */}
+      <Country width={800} height={600} />
     </div>
   )
 }
